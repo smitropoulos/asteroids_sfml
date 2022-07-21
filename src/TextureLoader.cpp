@@ -2,4 +2,10 @@
 // Created by Stefanos Mitropoulos on 20/7/22.
 //
 
-#include "../include/TextureLoader.h"
+#include "TextureLoader.h"
+
+
+sf::Texture TextureLoader::loadTexture(std::string pathToFile) {
+
+    return sf::Texture();
+}

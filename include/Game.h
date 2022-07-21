@@ -17,7 +17,6 @@ class Game {
     std::unique_ptr<sf::RenderWindow>(m_window);
     std::unique_ptr<EventHandler>(m_eventHandler);
     std::unique_ptr<Configuration::ConfigurationLoaderIni>(m_configurationLoader);
-    EntitiesRepository m_entitiesRepository;
     void update();
     void render();
   public:

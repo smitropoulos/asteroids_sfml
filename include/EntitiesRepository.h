@@ -12,6 +12,12 @@ class EntitiesRepository {
   protected:
     std::vector<std::unique_ptr<RenderableEntity>> m_entities;
   public:
+    static EntitiesRepository& getInstance() {
+
+        static EntitiesRepository xInstance = EntitiesRepository();
+        return xInstance;
+    }
+
     [[nodiscard]] const std::vector<std::unique_ptr<RenderableEntity>>& entities() const;
     void addEntity(std::unique_ptr<RenderableEntity> entity);
 };

@@ -22,10 +22,20 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+include_directories(include)
+include_directories(external/mINI/src)
 
-add_executable(sfml_asteroids src/main.cpp src/Game.cpp include/Game.h src/EventHandler.cpp include/EventHandler.h src/RenderableEntity.cpp include/RenderableEntity.h src/Player.cpp include/Player.h src/EntitiesRepository.cpp include/EntitiesRepository.h src/TextureLoader.cpp include/TextureLoader.h)
+add_executable(sfml_asteroids
+               src/main.cpp
+               src/Game.cpp
+               src/EventHandler.cpp
+               src/RenderableEntity.cpp
+               src/Player.cpp
+               src/EntitiesRepository.cpp
+               src/TextureLoader.cpp
+               src/TextureRepository.cpp
+               include/TextureRepositoryEntry.h src/EntitiesFactory.cpp include/EntitiesFactory.h include/EntityType.h)
 target_link_libraries(sfml_asteroids sfml-system sfml-window sfml-graphics sfml-audio ConfigurationLib)
 
 add_subdirectory(tests)
-include_directories(external/mINI/src)
 add_subdirectory(include/configuration)

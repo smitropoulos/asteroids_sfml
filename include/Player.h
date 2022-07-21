@@ -9,6 +9,7 @@
 class Player : public RenderableEntity{
   public:
     void render(sf::RenderWindow* window) override;
+
 };
 
 #endif //_PLAYER_H_

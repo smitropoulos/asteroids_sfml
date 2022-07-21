@@ -2,8 +2,10 @@
 // Created by Stefanos Mitropoulos on 20/7/22.
 //
 
-#include "../include/Game.h"
-#include "../include/Player.h"
+#include "Game.h"
+#include "Player.h"
+#include "TextureRepository.h"
+#include "EntitiesFactory.h"
 
 
 void Game::update() {
@@ -12,7 +14,7 @@ void Game::update() {
 void Game::render() {
 
     m_window->clear();
-    for ( const auto& entity: m_entitiesRepository.entities())
+    for ( const auto& entity: EntitiesRepository::getInstance().entities())
     {
         entity->render(m_window.get());
     }
@@ -50,10 +52,8 @@ void Game::initialize() {
     auto resolutionY = std::stol(m_configurationLoader->m_configuration.at("resolutionY"));
     m_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(resolutionX, resolutionY), "Asteroids");
 
-    auto player = std::make_unique<Player>();
-    player->load("/Users/smitropoulos/CLionProjects/sfml_asteroids/images/background.jpg");
-    m_entitiesRepository.addEntity(std::move(player));
-
+    EntitiesFactory plFact;
+    plFact.makeEntity(EntityType::Player);
     initialized = true;
 }
 
