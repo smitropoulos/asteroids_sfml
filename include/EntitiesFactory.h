@@ -11,6 +11,7 @@
 #include "RenderableEntity.h"
 #include "TextureRepository.h"
 #include "EntitiesRepository.h"
+#include "Rock.h"
 
 
 class EntitiesFactory {
@@ -24,11 +25,17 @@ class EntitiesFactory {
                 auto pl = std::make_unique<Player>();
                 auto plTexture = TextureRepository::getInstance().provideTexture("player");
                 pl->load(plTexture);
-                pl->setPosition(sf::Vector2i(100,100));
                 EntitiesRepository::getInstance().addEntity(std::move(pl));
                 break;
             }
-            case EntityType::Rock:break;
+            case EntityType::Rock:
+                {
+                    auto pl = std::make_unique<Rock>();
+                    auto plTexture = TextureRepository::getInstance().provideTexture("rock");
+                    pl->load(plTexture);
+                    EntitiesRepository::getInstance().addEntity(std::move(pl));
+                    break;
+                }
             case EntityType::SmallRock:break;
             case EntityType::Bullet:break;
         }

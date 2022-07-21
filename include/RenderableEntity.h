@@ -20,9 +20,10 @@ class RenderableEntity {
 
     virtual void load(const sf::Texture* texture) {
         m_sprite = sf::Sprite(*texture);
-        m_sprite.setPosition(100.f, 100.f);
     };
-    virtual void render(sf::RenderWindow *window) = 0;
+    virtual void render(sf::RenderWindow *window) {
+        window->draw(this->m_sprite);
+    };
     void setPosition(const sf::Vector2i& position);
     virtual ~RenderableEntity();
 };

@@ -8,8 +8,7 @@
 
 class Player : public RenderableEntity{
   public:
-    void render(sf::RenderWindow* window) override;
-
+    void load(const sf::Texture *texture) override;
 };
 
 #endif //_PLAYER_H_

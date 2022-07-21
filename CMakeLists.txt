@@ -34,7 +34,7 @@ add_executable(sfml_asteroids
                src/EntitiesRepository.cpp
                src/TextureLoader.cpp
                src/TextureRepository.cpp
-               include/TextureRepositoryEntry.h src/EntitiesFactory.cpp include/EntitiesFactory.h include/EntityType.h)
+               include/TextureRepositoryEntry.h src/EntitiesFactory.cpp include/EntitiesFactory.h include/EntityType.h src/Rock.cpp include/Rock.h)
 target_link_libraries(sfml_asteroids sfml-system sfml-window sfml-graphics sfml-audio ConfigurationLib)
 
 add_subdirectory(tests)

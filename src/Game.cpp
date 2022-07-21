@@ -52,8 +52,9 @@ void Game::initialize() {
     auto resolutionY = std::stol(m_configurationLoader->m_configuration.at("resolutionY"));
     m_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(resolutionX, resolutionY), "Asteroids");
 
-    EntitiesFactory plFact;
-    plFact.makeEntity(EntityType::Player);
+    EntitiesFactory entitiesFactory;
+    entitiesFactory.makeEntity(EntityType::Player);
+    entitiesFactory.makeEntity(EntityType::Rock);
     initialized = true;
 }
 
