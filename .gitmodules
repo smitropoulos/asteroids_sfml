@@ -1,0 +1,3 @@
+[submodule "external/mINI"]
+	path = external/mINI
+	url = https://github.com/pulzed/mINI.git

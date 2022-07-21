@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.22)
+project(sfml_asteroids)
+
+set(CMAKE_CXX_STANDARD 20)
+
+## If you want to link SFML statically
+# set(SFML_STATIC_LIBRARIES TRUE)
+
+## In most cases better set in the CMake cache
+# set(SFML_DIR "<sfml root prefix>/lib/cmake/SFML")
+
+find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
+
+#Add google test
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+
+add_executable(sfml_asteroids src/main.cpp src/Game.cpp include/Game.h src/EventHandler.cpp include/EventHandler.h src/RenderableEntity.cpp include/RenderableEntity.h src/Player.cpp include/Player.h src/EntitiesRepository.cpp include/EntitiesRepository.h src/TextureLoader.cpp include/TextureLoader.h)
+target_link_libraries(sfml_asteroids sfml-system sfml-window sfml-graphics sfml-audio ConfigurationLib)
+
+add_subdirectory(tests)
+include_directories(external/mINI/src)
+add_subdirectory(include/configuration)
