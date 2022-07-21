@@ -10,6 +10,7 @@
 
 
 class EventHandler {
+    virtual void handleEvent(sf::Event event) = 0;
 };
 
 #endif //_EVENTHANDLER_H_

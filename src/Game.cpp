@@ -2,13 +2,19 @@
 // Created by Stefanos Mitropoulos on 20/7/22.
 //
 
+#include <iostream>
 #include "Game.h"
 #include "Player.h"
-#include "TextureRepository.h"
 #include "EntitiesFactory.h"
+#include "RockEventHandler.h"
 
 
 void Game::update() {
+
+    for ( const auto& entity: EntitiesRepository::getInstance().entities())
+    {
+        entity.second->update();
+    }
 }
 
 void Game::render() {
@@ -16,7 +22,7 @@ void Game::render() {
     m_window->clear();
     for ( const auto& entity: EntitiesRepository::getInstance().entities())
     {
-        entity->render(m_window.get());
+        entity.second->render(m_window.get());
     }
     m_window->display();
 }
@@ -34,12 +40,26 @@ void Game::run() {
         sf::Event event{};
         while ( m_window->pollEvent(event))
         {
-            // "close requested" event: we close the window
-            if ( event.type == sf::Event::Closed )
+            switch ( event.type )
             {
-                m_window->close();
+                case sf::Event::KeyPressed:
+                {
+                    m_playerEventHandler->handleKeyboardEvent(event, true);
+                    break;
+                }
+                case sf::Event::KeyReleased:
+                {
+                    m_playerEventHandler->handleKeyboardEvent(event, false);
+                    break;
+                }
+                case sf::Event::Closed:
+                {
+                    m_window->close();
+                    break;
+                }
             }
         }
+
         update();
         render();
     }
@@ -52,9 +72,12 @@ void Game::initialize() {
     auto resolutionY = std::stol(m_configurationLoader->m_configuration.at("resolutionY"));
     m_window = std::make_unique<sf::RenderWindow>(sf::VideoMode(resolutionX, resolutionY), "Asteroids");
 
+    m_playerEventHandler = std::make_shared<PlayerEventHandler>();
+
     EntitiesFactory entitiesFactory;
-    entitiesFactory.makeEntity(EntityType::Player);
-    entitiesFactory.makeEntity(EntityType::Rock);
+    entitiesFactory.makeEntity(EntityType::Player, m_playerEventHandler.get());
+    entitiesFactory.makeEntity(EntityType::Rock, nullptr);
+
     initialized = true;
 }
 

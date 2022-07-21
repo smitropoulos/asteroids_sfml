@@ -10,6 +10,7 @@
 
 class Rock : public RenderableEntity {
   public:
+    void update() override;
     void load(const sf::Texture *texture) override;
 };
 

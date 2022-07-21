@@ -14,7 +14,8 @@ class RenderableEntity {
   protected:
     sf::Texture *m_texture{};
     sf::Sprite m_sprite;
-    sf::Vector2i m_position;
+    sf::Vector2f m_position;
+    float m_angle;
   public:
     RenderableEntity();
 
@@ -23,8 +24,11 @@ class RenderableEntity {
     };
     virtual void render(sf::RenderWindow *window) {
         window->draw(this->m_sprite);
+        wrapInWindow(window);
     };
-    void setPosition(const sf::Vector2i& position);
+    void setPosition(const sf::Vector2f& position);
+    virtual void wrapInWindow(sf::RenderWindow* window);
+    virtual void update() = 0;
     virtual ~RenderableEntity();
 };
 

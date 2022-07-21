@@ -16,7 +16,7 @@
 
 class EntitiesFactory {
   public:
-    void makeEntity(const EntityType entityType) {
+    void makeEntity(const EntityType entityType, EventHandler *eventHandler) {
 
         switch ( entityType )
         {
@@ -25,7 +25,8 @@ class EntitiesFactory {
                 auto pl = std::make_unique<Player>();
                 auto plTexture = TextureRepository::getInstance().provideTexture("player");
                 pl->load(plTexture);
-                EntitiesRepository::getInstance().addEntity(std::move(pl));
+                pl->setPlayerEventHandler(dynamic_cast<PlayerEventHandler *>(eventHandler));
+                EntitiesRepository::getInstance().addEntity(EntityType::Player, std::move(pl));
                 break;
             }
             case EntityType::Rock:
@@ -33,7 +34,7 @@ class EntitiesFactory {
                     auto pl = std::make_unique<Rock>();
                     auto plTexture = TextureRepository::getInstance().provideTexture("rock");
                     pl->load(plTexture);
-                    EntitiesRepository::getInstance().addEntity(std::move(pl));
+                    EntitiesRepository::getInstance().addEntity(EntityType::Rock, std::move(pl));
                     break;
                 }
             case EntityType::SmallRock:break;

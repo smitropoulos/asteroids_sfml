@@ -9,3 +9,6 @@ void Rock::load(const sf::Texture *texture) {
     RenderableEntity::load(texture);
     m_sprite.setPosition(200.f, 200.f);
 }
+
+void Rock::update() {
+}

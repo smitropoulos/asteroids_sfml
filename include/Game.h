@@ -9,6 +9,7 @@
 #include "EventHandler.h"
 #include "ConfigurationLoaderIni.h"
 #include "EntitiesRepository.h"
+#include "PlayerEventHandler.h"
 
 
 class Game {
@@ -17,6 +18,7 @@ class Game {
     std::unique_ptr<sf::RenderWindow>(m_window);
     std::unique_ptr<EventHandler>(m_eventHandler);
     std::unique_ptr<Configuration::ConfigurationLoaderIni>(m_configurationLoader);
+    std::shared_ptr<PlayerEventHandler>(m_playerEventHandler);
     void update();
     void render();
   public:

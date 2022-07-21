@@ -5,11 +5,12 @@
 #include "../include/EntitiesRepository.h"
 
 
-const std::vector<std::unique_ptr<RenderableEntity>>& EntitiesRepository::entities() const {
+const std::unordered_map<EntityType, std::unique_ptr<RenderableEntity>>& EntitiesRepository::entities() const {
 
     return m_entities;
 }
 
-void EntitiesRepository::addEntity(std::unique_ptr<RenderableEntity> entity) {
-    m_entities.push_back(std::move(entity));
+void EntitiesRepository::addEntity(EntityType type, std::unique_ptr<RenderableEntity> entity) {
+
+    m_entities.insert({type, std::move(entity)});
 }
